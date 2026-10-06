@@ -1,4 +1,4 @@
-class MediaManager {
+  class MediaManager {
     constructor(translator) {
       this.translator = translator;
       this.isProcessing = false;

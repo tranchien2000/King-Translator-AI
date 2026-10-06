@@ -1,4 +1,4 @@
-class PageTranslator {
+  class PageTranslator {
     constructor(translator) {
       this.translator = translator;
       this.settings = this.translator.userSettings.settings;

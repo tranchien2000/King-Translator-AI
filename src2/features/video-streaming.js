@@ -1,4 +1,4 @@
-class VideoStreamingTranslator {
+  class VideoStreamingTranslator {
     constructor(translator) {
       this.translator = translator;
       this.settings = this.translator.userSettings.settings;

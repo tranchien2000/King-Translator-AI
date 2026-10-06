@@ -1,4 +1,4 @@
-class APIKeyManager {
+  class APIKeyManager {
     constructor(settings, _) {
       this.settings = settings;
       this._ = _;

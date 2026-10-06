@@ -1,4 +1,4 @@
-class OCRManager {
+  class OCRManager {
     constructor(translator) {
       if (!translator) {
         throw new Error("Translator instance is required for OCRManager");

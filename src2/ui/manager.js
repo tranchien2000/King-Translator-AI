@@ -1,4 +1,4 @@
-class UIManager {
+  class UIManager {
     constructor(translator) {
       if (!translator) {
         throw new Error("Translator instance is required");

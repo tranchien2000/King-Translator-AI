@@ -1,51 +1,4 @@
-// Main entry point
-
-import Translator from "./translator.js";
-
-// Initialization check - prevent double initialization
-if (window.kingTranslatorInitialized) {
-  console.log("King Translator: Already initialized, skipping this execution.");
-} else {
-  window.kingTranslatorInitialized = true;
-
-function initializeTranslator() {
-    if (window.translatorInstance) {
-      window.translatorInstance.cleanup();
-    }
-    window.translatorInstance = new Translator();
-    setupGlobalObserver();
-  }
-  let globalObserver = null;
-function setupGlobalObserver() {
-    if (globalObserver) {
-      globalObserver.disconnect();
-    }
-    const rootContainer = window.translatorInstance?.getRootContainer();
-    if (!rootContainer) {
-      console.warn("Could not setup observer: root container not found.");
-      return;
-    }
-    globalObserver = new MutationObserver(debounce(() => {
-      if (window.translatorInstance && !document.body.contains(rootContainer)) {
-        console.warn("King Translator root element was removed, re-initializing Translator.");
-        globalObserver.disconnect();
-        initializeTranslator();
-      }
-    }, 200));
-    globalObserver.observe(document.body, { childList: true });
-  }
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-function createFileInput(accept, onFileSelected) {
+  function createFileInput(accept, onFileSelected) {
     return new Promise((resolve) => {
       const translator = window.translator;
       const _ = translator.userSettings._;
@@ -202,7 +155,7 @@ font-family: inherit;
       });
     });
   }
-function createFileOrUrlInput(acceptedTypes, onInputSelected) {
+  function createFileOrUrlInput(acceptedTypes, onInputSelected) {
     return new Promise((resolve) => {
       const translator = window.translator;
       const _ = translator.userSettings._;
@@ -590,4 +543,3 @@ font-family: inherit;
     }
   });
   initializeTranslator();
-}

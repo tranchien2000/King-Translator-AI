@@ -1,6 +1,4 @@
-import CONFIG from "./config.js";
-
-const DEFAULT_SETTINGS = {
+  const DEFAULT_SETTINGS = {
     uiLanguage: "en", // cài đặt ngôn ngữ giao diện mặc định: 'en', 'vi'
     theme: CONFIG.THEME.mode,
     apiProvider: CONFIG.API.currentProvider,

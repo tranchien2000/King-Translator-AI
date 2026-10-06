@@ -1,6 +1,4 @@
-import APIKeyManager from "./key-manager.js";
-
-class APIManager {
+  class APIManager {
     constructor(config, getSettings, _) {
       this.config = config;
       this.getSettings = getSettings;

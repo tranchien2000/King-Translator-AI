@@ -1,20 +1,4 @@
-// Translator class (main coordinator)
-
-import UserSettings from "./core/settings.js";
-import PersistentCache from "./core/cache.js";
-import UIRoot from "./ui/root.js";
-import FileProcessor from "./features/file/processor.js";
-import VideoStreamingTranslator from "./features/video-streaming.js";
-import APIManager from "./api/manager.js";
-import PageTranslator from "./features/page.js";
-import InputTranslator from "./features/input.js";
-import OCRManager from "./features/ocr.js";
-import MediaManager from "./features/media.js";
-import FileManager from "./features/file/manager.js";
-import UIManager from "./ui/manager.js";
-import CONFIG from "./config/config.js";
-
-class Translator {
+  class Translator {
     constructor() {
       if (window.translatorInstance) {
         window.translatorInstance.cleanup();
@@ -355,4 +339,30 @@ Lưu ý:
       if (this.videoStreaming) this.videoStreaming.cleanup();
       window.translatorInstance = null;
     }
+  }
+  function initializeTranslator() {
+    if (window.translatorInstance) {
+      window.translatorInstance.cleanup();
+    }
+    window.translatorInstance = new Translator();
+    setupGlobalObserver();
+  }
+  let globalObserver = null;
+  function setupGlobalObserver() {
+    if (globalObserver) {
+      globalObserver.disconnect();
+    }
+    const rootContainer = window.translatorInstance?.getRootContainer();
+    if (!rootContainer) {
+      console.warn("Could not setup observer: root container not found.");
+      return;
+    }
+    globalObserver = new MutationObserver(debounce(() => {
+      if (window.translatorInstance && !document.body.contains(rootContainer)) {
+        console.warn("King Translator root element was removed, re-initializing Translator.");
+        globalObserver.disconnect();
+        initializeTranslator();
+      }
+    }, 200));
+    globalObserver.observe(document.body, { childList: true });
   }

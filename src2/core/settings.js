@@ -1,8 +1,4 @@
-import CONFIG from "../config/config.js";
-import DEFAULT_SETTINGS from "../config/defaults.js";
-import MobileOptimizer from "./mobile.js";
-
-class UserSettings {
+  class UserSettings {
     constructor(translator) {
       this.translator = translator;
       this.settings = this.loadSettings();

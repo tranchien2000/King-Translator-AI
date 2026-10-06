@@ -1,4 +1,4 @@
-const CONFIG = {
+  const CONFIG = {
     API: {
       providers: {
         gemini: {

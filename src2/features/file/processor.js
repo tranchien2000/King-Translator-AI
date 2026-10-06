@@ -1,6 +1,4 @@
-import FileUploader from "./uploader.js";
-
-class FileProcessor {
+  class FileProcessor {
     constructor(translator) {
       this.translator = translator;
       this.uploader = new FileUploader(this.translator.userSettings);
@@ -133,7 +131,7 @@ class FileProcessor {
       }
     }
   }
-const RELIABLE_FORMATS = {
+  const RELIABLE_FORMATS = {
     text: {
       maxSize: 10 * 1024 * 1024,
       formats: [
