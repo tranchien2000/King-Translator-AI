@@ -1,0 +1,43 @@
+// ==UserScript==
+// @name          King Translator AI
+// @namespace     https://kingsmanvn.pages.dev
+// @version       5.4
+// @author        King1x32
+// @icon          https://raw.githubusercontent.com/king1x32/King-Translator-AI/refs/heads/main/icon/kings.jpg
+// @license       GPL3
+// @description   Dịch văn bản (bôi đen văn bản, khi nhập văn bản), hình ảnh, audio, video bằng Google Gemini API. Hỗ trợ popup phân tích từ vựng, popup dịch và dịch nhanh.
+// @match         *://*/*
+// @match         file:///*
+// @inject-into   auto
+// @grant         GM_xmlhttpRequest
+// @grant         GM_addStyle
+// @grant         GM_getValue
+// @grant         GM_setValue
+// @grant         GM_registerMenuCommand
+// @grant         unsafeWindow
+// @grant         GM_addElement
+// @grant         GM_notification
+// @grant         GM_setClipboard
+// @grant         window.close
+// @grant         window.focus
+// @grant         window.onurlchange
+// @connect       generativelanguage.googleapis.com
+// @connect       api.perplexity.ai
+// @connect       api.anthropic.com
+// @connect       api.openai.com
+// @connect       api.mistral.ai
+// @connect       api.deepseek.com
+// @connect       raw.githubusercontent.com
+// @connect       translate.googleapis.com
+// @connect       cdnjs.cloudflare.com
+// @connect       translate.google.com
+// @connect       texttospeech.googleapis.com
+// @connect       github.com
+// @connect       fonts.googleapis.com
+// @require       https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js
+// @require       https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js
+// @require       https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js
+// @require       https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js
+// @homepageURL   https://github.com/king1x32/King-Translator-AI
+// @downloadURL   https://raw.githubusercontent.com/king1x32/King-Translator-AI/refs/heads/main/King-Translator-AI.user.js
+// @updateURL     https://raw.githubusercontent.com/king1x32/King-Translator-AI/refs/heads/main/King-Translator-AI.user.js
