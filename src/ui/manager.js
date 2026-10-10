@@ -1131,11 +1131,13 @@ overflow-wrap: break-word; /* Ngắt từ nếu quá dài */
       try {
         const chunks = text.match(/.{1,200}(?:\s|$)/g) || [];
         const audioChunks = [];
+        const googleKey = this.settings.apiKey?.gemini?.[0] || this.settings.apiKey?.google_tts?.[0];
+        if (!googleKey) throw new Error("Google TTS API key not configured");
         for (const chunk of chunks) {
           const audioContent = await new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
               method: 'POST',
-              url: 'https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw',
+              url: `https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=${googleKey}`,
               headers: { 'Content-Type': 'application/json' },
               data: JSON.stringify({
                 audioConfig: { audioEncoding: 'MP3', pitch: parseFloat(options.pitchValue) - 1.0, speakingRate: parseFloat(options.speedValue) },
