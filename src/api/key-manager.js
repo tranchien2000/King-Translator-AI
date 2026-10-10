@@ -62,7 +62,7 @@
       let currentKeyIndex = 0;
       const processRequest = async () => {
         if (currentKeyIndex >= availableKeys.length) return null;
-        const key = availableKeys[++currentKeyIndex];
+        const key = availableKeys[currentKeyIndex++];
         try {
           const result = await this.useKey(key, () => promiseGenerator(key));
           if (result) {
