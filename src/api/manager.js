@@ -82,9 +82,15 @@
               }
             } else {
               console.error("API Error Response:", response.status, response.response);
+              const errorMsg = response.response?.error?.message
+                || response.response?.error
+                || response.response?.errors?.[0]?.message
+                || response.response?.message
+                || (typeof response.response === 'string' ? response.response : JSON.stringify(response.response))
+                || this._("notifications.unknown_api_error");
               reject({
                 status: response.status,
-                message: response.response?.error?.message || response.response?.error || this._("notifications.unknown_api_error")
+                message: errorMsg
               });
             }
           },
