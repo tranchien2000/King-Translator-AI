@@ -1,4 +1,4 @@
-class UIRoot {
+  class UIRoot {
     constructor(translator) {
       this.translator = translator;
       this.settings = this.translator.userSettings.settings;

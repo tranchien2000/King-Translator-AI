@@ -1,4 +1,4 @@
-class FileUploader {
+  class FileUploader {
     constructor(settings) {
       this.settings = settings.settings;
       this._ = settings._;

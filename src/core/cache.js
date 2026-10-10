@@ -1,4 +1,4 @@
-class PersistentCache {
+  class PersistentCache {
     constructor(storageKey, maxSize, expirationTime) {
       this.storageKey = storageKey;
       this.maxSize = maxSize;

@@ -1,4 +1,4 @@
-class InputTranslator {
+  class InputTranslator {
     constructor(translator) {
       this.translator = translator;
       this.settings = this.translator.userSettings.settings;

@@ -1,18 +1,4 @@
-const RELIABLE_FORMATS = {
-    text: {
-      maxSize: 10 * 1024 * 1024,
-      formats: [
-        { ext: 'txt', mime: 'text/plain' },
-        { ext: 'srt', mime: 'application/x-subrip' },
-        { ext: 'vtt', mime: 'text/vtt' }, // Phụ đề web
-        { ext: 'pdf', mime: 'application/pdf' },
-        { ext: 'html', mime: 'text/html' },
-        { ext: 'md', mime: 'text/markdown' },
-        { ext: 'json', mime: 'application/json' }
-      ]
-    }
-  };
-class FileManager {
+  class FileManager {
     constructor(translator) {
       this.translator = translator;
       this._ = translator.userSettings._;

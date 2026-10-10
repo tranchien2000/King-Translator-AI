@@ -5,32 +5,32 @@ const originalContent = fs.readFileSync('./King-Translator-AI.user.js', 'utf8');
 const metadataMatch = originalContent.match(/\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==/);
 const metadata = metadataMatch ? metadataMatch[0] : '';
 
-console.log('Building exact replica from src2/...\n');
+console.log('Building exact replica from src/...\n');
 
 // Thứ tự chính xác như file gốc
 const modules = [
-  'src2/config/config.js',
-  'src2/config/defaults.js',
-  'src2/core/mobile.js',
-  'src2/utils/storage.js',
-  'src2/utils/dom.js',
-  'src2/core/settings.js',
-  'src2/api/key-manager.js',
-  'src2/api/manager.js',
-  'src2/features/input.js',
-  'src2/features/ocr.js',
-  'src2/features/media.js',
-  'src2/features/video-streaming.js',
-  'src2/features/page.js',
-  'src2/core/cache.js',
-  'src2/features/file/uploader.js',
-  'src2/features/file/processor.js',
-  'src2/features/file/manager.js',
-  'src2/ui/root.js',
-  'src2/ui/manager.js',
-  'src2/translator.js',
-  'src2/utils/debounce.js',
-  'src2/main.js'
+  'src/config/config.js',
+  'src/config/defaults.js',
+  'src/core/mobile.js',
+  'src/utils/storage.js',
+  'src/utils/dom.js',
+  'src/core/settings.js',
+  'src/api/key-manager.js',
+  'src/api/manager.js',
+  'src/features/input.js',
+  'src/features/ocr.js',
+  'src/features/media.js',
+  'src/features/video-streaming.js',
+  'src/features/page.js',
+  'src/core/cache.js',
+  'src/features/file/uploader.js',
+  'src/features/file/processor.js',
+  'src/features/file/manager.js',
+  'src/ui/root.js',
+  'src/ui/manager.js',
+  'src/translator.js',
+  'src/utils/debounce.js',
+  'src/main.js'
 ];
 
 // Wrapper opening (lines 45-51 from original)
