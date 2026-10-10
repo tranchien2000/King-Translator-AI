@@ -31,7 +31,8 @@
         ['openai', 'OpenAI'],
         ['mistral', 'Mistral'],
         ['deepseek', 'Deepseek'],
-        ['ollama', 'Ollama']
+        ['ollama', 'Ollama'],
+        ['localproxy', 'Local Proxy 🚀']
       ];
       return `
   ${this.chunk(providers, 2).map(group => `
@@ -68,6 +69,45 @@
 `;
     }
     createModelSection(provider, settings) {
+      if (provider === 'localproxy') {
+        const options = settings.localproxyOptions;
+        return `
+  <div class="localproxy-models" style="display: ${settings.apiProvider === 'localproxy' ? "" : "none"}">
+    <div class="settings-grid">
+      <span class="settings-label">Server Endpoint:</span>
+      <input type="text" id="localproxy-endpoint" class="settings-input"
+        value="${options?.endpoint || 'http://localhost:3000'}" placeholder="http://localhost:3000">
+    </div>
+    <div class="settings-grid">
+      <span class="settings-label">Provider:</span>
+      <select id="localproxy-provider" class="settings-input">
+        <option value="9router" ${options?.provider === '9router' ? 'selected' : ''}>9router (Recommended)</option>
+        <option value="openrouter" ${options?.provider === 'openrouter' ? 'selected' : ''}>OpenRouter (Free)</option>
+        <option value="groq" ${options?.provider === 'groq' ? 'selected' : ''}>Groq (Fast)</option>
+        <option value="together" ${options?.provider === 'together' ? 'selected' : ''}>Together AI</option>
+      </select>
+    </div>
+    <div class="settings-grid">
+      <span class="settings-label">Model:</span>
+      <select id="localproxy-model" class="settings-input">
+        <option value="9router-free" ${options?.model === '9router-free' ? 'selected' : ''}>GPT-4o-mini (Free)</option>
+        <option value="9router-fast" ${options?.model === '9router-fast' ? 'selected' : ''}>GPT-4o-mini</option>
+        <option value="9router-balanced" ${options?.model === '9router-balanced' ? 'selected' : ''}>Claude 3.5 Sonnet</option>
+        <option value="9router-pro" ${options?.model === '9router-pro' ? 'selected' : ''}>GPT-4o</option>
+        <option value="openrouter-free" ${options?.model === 'openrouter-free' ? 'selected' : ''}>Gemma 2 9B (Free)</option>
+        <option value="groq-fast" ${options?.model === 'groq-fast' ? 'selected' : ''}>Llama 3.3 70B (Fast)</option>
+        <option value="groq-balanced" ${options?.model === 'groq-balanced' ? 'selected' : ''}>Llama 3.1 70B</option>
+        <option value="together-free" ${options?.model === 'together-free' ? 'selected' : ''}>Llama 3.2 11B Vision</option>
+      </select>
+    </div>
+    <div class="settings-grid">
+      <span class="settings-label">${this._("settings.temperature")}</span>
+      <input type="number" id="localproxy-temperature" class="settings-input"
+        value="${options?.temperature ?? 0.7}" min="0" max="2" step="0.1">
+    </div>
+  </div>
+`;
+      }
       if (provider === 'ollama') {
         const options = settings.ollamaOptions;
         return `
@@ -593,7 +633,7 @@ ${this.createProviderRadios(settings)}
         ${this.createProviderRadios(this.settings)}
         <h3>API MODEL</h3>
         <div class="api-model-settings">
-          ${['gemini', 'perplexity', 'claude', 'openai', 'mistral', 'deepseek', 'ollama'].map(p => this.createModelSection(p, this.settings)).join('')}
+          ${['gemini', 'perplexity', 'claude', 'openai', 'mistral', 'deepseek', 'ollama', 'localproxy'].map(p => this.createModelSection(p, this.settings)).join('')}
         </div>
         <h3>API KEYS</h3>
         <div class="api-keys-settings">
@@ -1130,7 +1170,7 @@ ${this.createProviderRadios(settings)}
       if (sidebarLinks.length > 0) {
         sidebarLinks[0].click();
       }
-      const providers = ['gemini', 'perplexity', 'claude', 'openai', 'mistral', 'deepseek', 'ollama'];
+      const providers = ['gemini', 'perplexity', 'claude', 'openai', 'mistral', 'deepseek', 'ollama', 'localproxy'];
       container.querySelectorAll('input[name="apiProvider"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
           const provider = e.target.value;
@@ -1415,6 +1455,10 @@ ${this.createProviderRadios(settings)}
           ...DEFAULT_SETTINGS.ollamaOptions,
           ...(savedSettings?.ollamaOptions || {})
         },
+        localproxyOptions: {
+          ...DEFAULT_SETTINGS.localproxyOptions,
+          ...(savedSettings?.localproxyOptions || {})
+        },
         apiKey: {
           gemini: [
             ...(savedSettings?.apiKey?.gemini ||
@@ -1644,6 +1688,12 @@ ${this.createProviderRadios(settings)}
           temperature: parseFloat(settingsUI.querySelector('#ollama-temperature')?.value),
           topP: parseFloat(settingsUI.querySelector('#ollama-top-p')?.value),
           topK: parseInt(settingsUI.querySelector('#ollama-top-k')?.value, 10),
+        },
+        localproxyOptions: {
+          endpoint: settingsUI.querySelector('#localproxy-endpoint')?.value.trim() || 'http://localhost:3000',
+          provider: settingsUI.querySelector('#localproxy-provider')?.value || 'openrouter',
+          model: settingsUI.querySelector('#localproxy-model')?.value || 'openrouter-free',
+          temperature: parseFloat(settingsUI.querySelector('#localproxy-temperature')?.value) || 0.7,
         },
         contextMenu: {
           enabled: settingsUI.querySelector("#contextMenuEnabled").checked

@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name          King Translator AI
+// @name          King Translator AI(old)
 // @namespace     https://kingsmanvn.pages.dev
 // @version       5.4
 // @author        King1x32

@@ -1511,8 +1511,8 @@ overflow-wrap: break-word; /* Ngắt từ nếu quá dài */
         hideSettingsButton();
       });
       let isPanelVisible = false;
-      const showSettingsPanel = () => {
-        updateVoices(this.selectSource, true);
+      const showSettingsPanel = async () => {
+        await updateVoices(this.selectSource, true);
         settingsPanel.style.display = 'flex';
         isPanelVisible = true;
         showSettingsButton();
@@ -1524,21 +1524,21 @@ overflow-wrap: break-word; /* Ngắt từ nếu quá dài */
           hideSettingsButton();
         }
       };
-      settingsButton.addEventListener('click', (e) => {
+      settingsButton.addEventListener('click', async (e) => {
         e.stopPropagation();
         if (isPanelVisible) {
           hideSettingsPanel();
         } else {
-          showSettingsPanel();
+          await showSettingsPanel();
         }
       });
-      settingsButton.addEventListener('touchend', (e) => {
+      settingsButton.addEventListener('touchend', async (e) => {
         e.preventDefault();
         e.stopPropagation();
         if (isPanelVisible) {
           hideSettingsPanel();
         } else {
-          showSettingsPanel();
+          await showSettingsPanel();
         }
       });
       document.addEventListener('click', (e) => {

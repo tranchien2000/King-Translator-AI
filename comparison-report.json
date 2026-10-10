@@ -1,20 +1,20 @@
 {
-  "timestamp": "2026-10-06T18:29:01.804Z",
+  "timestamp": "2026-10-06T19:41:16.718Z",
   "original": {
     "size": 621468,
     "lines": 14585,
     "metadataLength": 2124
   },
   "rebuilt": {
-    "size": 621468,
-    "lines": 14585,
+    "size": 627229,
+    "lines": 14700,
     "metadataLength": 2124
   },
   "diff": {
-    "sizeBytes": 0,
-    "sizePercent": 0,
-    "lines": 0,
+    "sizeBytes": 5761,
+    "sizePercent": 0.93,
+    "lines": 115,
     "metadataIdentical": true,
-    "codeIdentical": true
+    "codeIdentical": false
   }
 }

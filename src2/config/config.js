@@ -355,6 +355,53 @@
             }
             throw new Error("Không thể đọc kết quả từ API Ollama.");
           }
+        },
+        localproxy: {
+          baseUrl: "http://localhost:3000/v1/translate",
+          models: {
+            fast: ["9router-free", "groq-fast", "openrouter-free"],
+            balance: ["9router-balanced", "groq-balanced"],
+            pro: ["9router-pro"]
+          },
+          headers: {
+            "Content-Type": "application/json"
+          },
+          createRequestBody: (content, model = "9router-free", temperature = 0.7) => {
+            const [provider, modelType] = model.split('-');
+            const modelMap = {
+              '9router-free': 'gpt-4o-mini-free',
+              '9router-fast': 'gpt-4o-mini',
+              '9router-balanced': 'claude-3-5-sonnet-20241022',
+              '9router-pro': 'gpt-4o',
+              'openrouter-free': 'google/gemma-2-9b-it:free',
+              'groq-fast': 'llama-3.3-70b-versatile',
+              'groq-balanced': 'llama-3.1-70b-versatile',
+              'together-free': 'meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo'
+            };
+
+            return {
+              text: typeof content === 'string' ? content : content[0]?.text || '',
+              provider: provider,
+              model: modelMap[model],
+              temperature: temperature
+            };
+          },
+          createBinaryParts: (prompt, mimeType, base64Data) => {
+            return {
+              text: prompt,
+              image: `data:${mimeType};base64,${base64Data}`,
+              provider: 'together'
+            };
+          },
+          responseParser: (response) => {
+            if (typeof response === "string") {
+              return response;
+            }
+            if (response?.success && response?.text) {
+              return response.text;
+            }
+            throw new Error("Không thể đọc kết quả từ Local Proxy");
+          }
         }
       },
       currentProvider: "gemini",

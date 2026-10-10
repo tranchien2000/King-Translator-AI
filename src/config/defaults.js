@@ -1,6 +1,4 @@
-import CONFIG from "./config.js";
-
-const DEFAULT_SETTINGS = {
+  const DEFAULT_SETTINGS = {
     uiLanguage: "en", // cài đặt ngôn ngữ giao diện mặc định: 'en', 'vi'
     theme: CONFIG.THEME.mode,
     apiProvider: CONFIG.API.currentProvider,
@@ -63,6 +61,12 @@ const DEFAULT_SETTINGS = {
     ollamaOptions: {
       endpoint: "http://localhost:11434",
       model: "llama3",
+    },
+    localproxyOptions: {
+      endpoint: "http://localhost:3000",
+      provider: "9router",
+      model: "9router-free",
+      temperature: 0.7
     },
     contextMenu: {
       enabled: true

@@ -12,7 +12,7 @@
         throw new Error(`Provider ${this.currentProvider} not found`);
       }
       try {
-        if (this.currentProvider === "ollama") {
+        if (this.currentProvider === "ollama" || this.currentProvider === "localproxy") {
           return await this.makeApiRequest(null, prompt, useCase);
         }
         const settings = this.getSettings();
@@ -149,6 +149,16 @@
             ),
             responseParser: config.responseParser
           };
+        case 'localproxy':
+          const proxyEndpoint = settings.localproxyOptions.endpoint;
+          const proxyModel = settings.localproxyOptions.model;
+          const proxyTemp = settings.localproxyOptions.temperature;
+          return {
+            url: `${proxyEndpoint}/v1/translate`,
+            headers: config.headers,
+            body: config.createRequestBody(content, proxyModel, proxyTemp),
+            responseParser: config.responseParser
+          };
         default:
           throw new Error(this._("notifications.unsupported_provider") + ` ${provider}`);
       }
@@ -193,6 +203,8 @@
         return this.getDeepseekModel();
       } else if (provider === 'ollama') {
         return settings.ollamaOptions.model || 'llama3';
+      } else if (provider === 'localproxy') {
+        return settings.localproxyOptions.model || 'openrouter-free';
       }
       const Options = settings[`${provider}Options`];
       const config = this.config.providers[provider];

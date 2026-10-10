@@ -62,6 +62,12 @@
       endpoint: "http://localhost:11434",
       model: "llama3",
     },
+    localproxyOptions: {
+      endpoint: "http://localhost:3000",
+      provider: "9router",
+      model: "9router-free",
+      temperature: 0.7
+    },
     contextMenu: {
       enabled: true
     },

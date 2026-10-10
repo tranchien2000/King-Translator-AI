@@ -4,7 +4,8 @@
   "description": "King Translator AI UserScript - Refactored",
   "main": "src/main.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "node build-exact3.js",
+    "build:webpack": "webpack --mode production",
     "dev": "webpack --mode development --watch",
     "compare": "node compare-output.js"
   },
